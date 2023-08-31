@@ -1,3 +1,10 @@
 #!/bin/bash
-chmod a+x hello
+#chmod a+x hello
+# Get the current permissions of the file
+permissions=$(stat -c "%a" hello)
 
+# Add the execute permission for the owner, group owner and others
+new_permissions=$(echo "$permissions" | sed 's/[-rw-r--r--]/[-rwxr-xr-x]/')
+
+# Change the permissions of the file
+chmod "$new_permissions" hello
